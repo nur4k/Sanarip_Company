@@ -44,7 +44,7 @@ class Contour(models.Model):
     geometry = models.PolygonField('Координаты')
     
     def __str__(self) -> str:
-        return f'{self.title} -- {self.canton}'
+        return f'{self.canton}'
     
     class Meta:
         verbose_name = 'Контур'
