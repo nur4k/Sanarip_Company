@@ -17,9 +17,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework import routers
+from rest_framework.schemas import get_schema_view
+from drf_yasg.views import get_schema_view as get_swagger_view
+from drf_yasg import openapi
+
+
+router = routers.DefaultRouter()
+
+schema_view = get_swagger_view(
+    openapi.Info(
+        title="Geometry API",
+        default_version='v1',
+        description="Your API description",
+        contact=openapi.Contact(email="your-email@example.com"),
+    ),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restframework/', include('rest_framework.urls')),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),
     
+    path('api/', include('geometry_app.urls')),
 ]

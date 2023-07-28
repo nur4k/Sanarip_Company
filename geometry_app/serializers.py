@@ -18,7 +18,7 @@ class DistrictSerialzier(serializers.ModelSerializer):
 class CantonSerialzier(serializers.ModelSerializer):
     class Meta:
         model = Canton
-        fields = ('id', 'title', 'geometry', 'dictrit')
+        fields = ('id', 'title', 'geometry', 'district')
 
 
 class ContourSerialzier(serializers.ModelSerializer):
