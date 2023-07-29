@@ -29,8 +29,8 @@ schema_view = get_swagger_view(
     openapi.Info(
         title="Geometry API",
         default_version='v1',
-        description="Your API description",
-        contact=openapi.Contact(email="your-email@example.com"),
+        description="Geometry App description",
+        contact=openapi.Contact(email="panpanzov.nur@bk.ru"),
     ),
 )
 
