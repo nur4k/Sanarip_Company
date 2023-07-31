@@ -11,4 +11,3 @@ RUN poetry config virtualenvs.in-project true
 RUN poetry install --only main
 
 CMD python manage.py migrate && python manage.py fill_database_with_data && python manage.py runserver 0.0.0.0:1111
-
