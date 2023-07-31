@@ -1,15 +1,22 @@
-# Используем базовый образ Python с Poetry
+# Use the official Python image
 FROM python:3.11
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update \
+    && apt-get install -y curl \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN curl -sSL https://install.python-poetry.org | python -
-RUN poetry config virtualenvs.create false
-COPY pyproject.toml poetry.lock /app/
-RUN poetry install --no-dev --no-root
 
 WORKDIR /app
 
+COPY pyproject.toml poetry.lock /app/
+
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-dev --no-interaction --no-ansi
+
 COPY . /app/
 
-CMD poetry run python manage.py migrate && poetry run python manage.py fill_database_with_data && poetry run python manage.py runserver 0.0.0.0:1111
+CMD python manage.py migrate && python manage.py fill_database_with_data && python manage.py runserver 0.0.0.0:1111
