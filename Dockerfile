@@ -1,22 +1,14 @@
-# Use the official Python image
-FROM python:3.11
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN apt-get update \
-    && apt-get install -y curl \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN curl -sSL https://install.python-poetry.org | python -
-
+FROM python:3.10-slim as builder
 WORKDIR /app
+## Install poetry
+RUN apt-get update && apt-get install -y curl
+RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/etc/poetry python3 -
+ENV PATH=$PATH:/etc/poetry/bin
 
-COPY pyproject.toml poetry.lock /app/
-
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi
-
-COPY . /app/
+##
+ADD ./poetry.lock ./pyproject.toml ./
+RUN poetry config virtualenvs.in-project true
+RUN poetry install --only main
 
 CMD python manage.py migrate && python manage.py fill_database_with_data && python manage.py runserver 0.0.0.0:1111
+
