@@ -11,7 +11,7 @@ django.setup()
 def fill_database_with_data():
     # Создание региона
     region_geometry = Polygon(((0, 0), (0, 1), (1, 1), (1, 0), (0, 0)))
-    region = Region.objects.create(title='Кыргызстан', geometry=region_geometry)
+    region = Region.objects.create(title='Чуй', geometry=region_geometry)
 
     # Создание районов
     for i in range(1, 4):

@@ -4,9 +4,9 @@ services:
   db:
     image: postgis/postgis:latest
     environment:
-      POSTGRES_DB: my_database
-      POSTGRES_USER: my_database_user
-      POSTGRES_PASSWORD: my_database_password
+      POSTGRES_DB: geo_db
+      POSTGRES_USER: geo_user
+      POSTGRES_PASSWORD: geo_password
     ports:
       - "5432:5432"
   
