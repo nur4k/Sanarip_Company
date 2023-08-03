@@ -11,10 +11,11 @@ django = "^4.2.3"
 djangorestframework = "^3.14.0"
 django-geo = "^0.8"
 postgis = "^1.0.4"
-psycopg2 = "^2.9.6"
+psycopg2 = "2.9.6"
 drf-yasg = "^1.21.7"
 django-jazzmin = "^2.6.0"
 django-contrib-postgres = "^0.0.1"
+psycopg2-binary = "^2.9.6"
 
 
 [build-system]
